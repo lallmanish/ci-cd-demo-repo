@@ -33,7 +33,7 @@ jobs:
         DATABASE_URL: ${{ secrets.POSTGRES_URL }}
       run: |
         echo "Running SQL script on Neon DB"
-        psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f schema.sql
+        psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f .github/workflows/schema.sql
 
     - name: Run Python script
       run: python app.py
