@@ -37,3 +37,9 @@ jobs:
 
     - name: Run Python script
       run: python app.py
+    - name: Verify data in table
+      env:
+        DATABASE_URL: ${{ secrets.POSTGRES_URL }}
+      run: |
+        echo "Verifying data..."
+        psql "$DATABASE_URL" -c "SELECT * FROM demo_table;"
