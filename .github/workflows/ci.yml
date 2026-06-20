@@ -25,4 +25,14 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Run Python script
-      run: python app.py
+      run: python app.py- name: Install PostgreSQL client
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y postgresql-client
+
+    - name: Run schema.sql on Neon DB
+      env:
+        DATABASE_URL: ${{ secrets.POSTGRES_URL }}
+      run: |
+        echo "Running SQL script on Neon DB"
+        psql "$DATABASE_URL" -f schema.sql
